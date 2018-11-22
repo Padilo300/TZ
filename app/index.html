@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#9CC2CE"> <!-- цвет вкладки chrome -->
+    <link rel="shortcut icon" href="img/ico/triangle.png" type="image/x-icon">
+    <title>Padilo</title>
+
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+        <div class="modal fade start_modal" id="start_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                      <div class="container">
+                          <div class="row">
+                              <div class="col col-12 col-md-6">
+                                  <img src="/img/woman.png" alt="woman pin up">
+                              </div><!-- end col -->
+                              <div class="col col-12 col-md-6">
+                                  <div class="wrapText">
+                                      <p>
+                                          Подпишись на новости
+                                      </p>
+                                      <p>
+                                          Гарантировано получи
+                                          <br>
+                                          <span>
+                                              100 грн В подарок
+                                          </span>
+                                      </p>
+                                      <p>
+                                          100 грн скидка при заказе от 1000 грн
+                                      </p>
+                                  </div>
+                                 
+                              </div><!-- end col -->
+                          </div><!-- end row -->
+                          <div class="row">
+                              <div class="col col-12">
+                                  <form action="/" method="POST" id="emailSend">
+                                      <input type="email" name="email" placeholder=" Введите свой E-mail">
+                                      <button type="submit">
+                                          отправить
+                                      </button>
+                                  </form>
+                              </div> <!-- end col -->
+                          </div><!-- end row  -->
+                      </div><!-- end container -->
+                     
+                  </div>
+                </div>
+              </div>
+
+
+    <script src="/js/libs/jquery-3.3.1.min.js"   ></script>
+    <script src="/js/libs/bootstrap.min.js"     defer ></script>
+    <script src="/js/libs/numerator.js"         defer ></script>
+    <script src="/js/libs/slow_scroll.js"       defer ></script>
+    <script src="/js/libs/slick.min.js"         defer ></script>
+    <script src="/js/libs/wow.js"               defer ></script>
+    <script src="/js/my.js"                     defer ></script>
+    <script>
+            $( document ).ready(function() {
+    
+                //setTimeout(function() {$('#start_modal').modal('show')}, 10000);
+              
+    
+                $("#emailSend").submit(function(e) {
+                    e.preventDefault();
+                    var form_data = $(this).serialize();
+                    $.ajax({
+                        type: "POST",
+                        url: "/php/sendMail.php",
+                        data: form_data,
+                        success: function () {
+                            
+                            $('#modalForm').modal('hide');
+                            $('#modalFuncYou').modal('show');
+                            $('#bxform').trigger('reset');
+                        },
+                        error: function (data) {
+                            console.log(data);
+                        }
+                    });
+                    return false;
+                
+                });
+            });
+
+            $(function() {
+                // настройки скролла   
+                // Default
+                jQuery.scrollSpeed(120, 1000);
+
+                // Custom Easing
+                // jQuery.scrollSpeed(100, 800, 'easeOutCubic');
+            });
+           
+        </script>    
+   
+</body>
+</html>
