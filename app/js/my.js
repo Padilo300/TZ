@@ -42,9 +42,8 @@ $(document).ready(function () {
              data: form_data,
              success: function () {
                  
-                 $('#modalForm').modal('hide');
-                 $('#modalFuncYou').modal('show');
-                 $('#bxform').trigger('reset');
+                 $('#emailSend').modal('hide');
+                 $('#emailSend').trigger('reset');
              },
              error: function (data) {
                  console.log(data);
